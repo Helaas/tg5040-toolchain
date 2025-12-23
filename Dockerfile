@@ -6,8 +6,6 @@ RUN apt-get update && apt-get install -y \
     #    build-essential \
     cmake \
     ninja-build \
-    liblz4-1 \
-    liblz4-dev \
     autotools-dev \
     autoconf \
     automake \
@@ -94,11 +92,7 @@ COPY support .
 RUN ./build-libzip.sh
 RUN ./build-bluez.sh
 RUN ./build-libsamplerate.sh
-
-# Copy liblz4 libraries to sysroot
-# liblz4.* gets .a and .so, liblz4.so.* gets .so.1 and .so.1.x.x
-RUN cp /usr/lib/aarch64-linux-gnu/liblz4.* ${PREFIX}/lib/ 2>/dev/null || true && \
-    cp /usr/lib/aarch64-linux-gnu/liblz4.so.* ${PREFIX}/lib/ 2>/dev/null || true
+RUN ./build-lz4.sh
 
 ENV UNION_PLATFORM=tg5040
 # do we still need this?
