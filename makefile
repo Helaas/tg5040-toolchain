@@ -1,10 +1,9 @@
 .PHONY: shell
 .PHONY: clean
 
-PLATFORM=tg5040
-IMAGE_REPO=ghcr.io/helaas
-IMAGE_TAG=modernize-lz4
-IMAGE_NAME=${IMAGE_REPO}/${PLATFORM}-toolchain:${IMAGE_TAG}
+TOOLCHAIN_NAME=tg5040-modernize
+IMAGE_REPO=ghcr.io/loveretro
+IMAGE_NAME=${IMAGE_REPO}/${TOOLCHAIN_NAME}
 WORKSPACE_DIR := $(shell pwd)/workspace
 
 CONTAINER_NAME=$(shell docker ps -f "ancestor=$(IMAGE_NAME)" --format "{{.Names}}")
